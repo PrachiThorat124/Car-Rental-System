@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Rental System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">🚗 CarRental</div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="navigate('home')">Home</a></li>
+      <li><a href="#" onclick="navigate('about')">About</a></li>
+      <li><a href="#" onclick="navigate('payment')">Payment</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <div id="home" class="page">
+    <div class="container">
+      <h1>Welcome to Our Car Rental Portal</h1>
+      <div class="menu">
+        <button onclick="showCars('all')">All Cars</button>
+        <button onclick="showCars('available')">Available</button>
+        <button onclick="toggleModal('rent')">Rent</button>
+        <button onclick="toggleModal('return')">Return</button>
+        <button onclick="toggleModal('add')">Add Car</button>
+      </div>
+      <div id="car-list" class="card-container"></div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page hidden">
+    <div class="container">
+      <h2>About CarRental</h2>
+      <p>
+        CarRental is a web-based car rental system designed to streamline the process of renting and returning cars. 
+        We offer a wide range of cars at affordable rates with an intuitive, interactive 3D-like UI.
+      </p>
+      <ul>
+        <li>✅ Real-time availability</li>
+        <li>✅ Rental history tracking</li>
+        <li>✅ Simple, user-friendly interface</li>
+        <li>✅ Secure and transparent pricing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAYMENT PAGE -->
+  <div id="payment" class="page hidden">
+    <div class="container">
+      <h2>Payment Portal</h2>
+      <form class="payment-form" onsubmit="makePayment(event)">
+        <input type="text" placeholder="Cardholder Name" required />
+        <input type="text" placeholder="Card Number" maxlength="16" required />
+        <input type="text" placeholder="MM/YY" required />
+        <input type="text" placeholder="CVV" maxlength="3" required />
+        <button type="submit">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="modal-rent" class="modal hidden">
+    <h2>Rent a Car</h2>
+    <input type="number" id="rentCarId" placeholder="Car ID" />
+    <input type="number" id="rentDays" placeholder="Days" />
+    <button onclick="rentCar()">Submit</button>
+  </div>
+
+  <div id="modal-return" class="modal hidden">
+    <h2>Return a Car</h2>
+    <input type="number" id="returnCarId" placeholder="Car ID" />
+    <button onclick="returnCar()">Submit</button>
+  </div>
+
+  <div id="modal-add" class="modal hidden">
+    <h2>Add New Car</h2>
+    <input type="text" id="newCarModel" placeholder="Car Model" />
+    <input type="number" id="newCarPrice" placeholder="Price/Day" />
+    <button onclick="addNewCar()">Add Car</button>
+  </div>
+
+  <!-- FOOTER -->
+  <<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <img src="https://img.icons8.com/color/48/car.png" alt="CarRental Logo" class="footer-logo" />
+    <p>© 2025 CarRental. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://www.instagram.com" target="_blank" title="Instagram">
+        <img src="https://img.icons8.com/fluency/32/instagram-new.png" alt="Instagram" />
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+        <img src="https://img.icons8.com/fluency/32/linkedin.png" alt="LinkedIn" />
+      </a>
+      <a href="https://www.facebook.com" target="_blank" title="Facebook">
+        <img src="https://img.icons8.com/fluency/32/facebook-new.png" alt="Facebook" />
+      </a>
+      <a href="https://github.com" target="_blank" title="GitHub">
+        <img src="https://img.icons8.com/fluency/32/github.png" alt="GitHub" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
