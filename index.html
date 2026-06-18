@@ -1,118 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Rental System</title>
+  <title>DriveNow — Premium Car Rentals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">🚗 CarRental</h1>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#payment">Payment</a></li>
-      </ul>
-    </nav>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <span class="logo-icon">◈</span>
+        <span>Drive<strong>Now</strong></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">Fleet</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#payment" class="nav-link">Payment</a></li>
+        </ul>
+      </nav>
+      <button class="btn-primary nav-cta" onclick="openModal('rent')">Book Now</button>
+    </div>
   </header>
 
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Premium Fleet · Pune & Beyond</p>
+      <h1 class="hero-title">Drive the <br><em>road you deserve.</em></h1>
+      <p class="hero-sub">Flexible rentals, zero hassle. Pick your car and go.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('fleet').scrollIntoView({behavior:'smooth'})">Browse Fleet</button>
+        <button class="btn-ghost" onclick="openModal('rent')">Quick Rent</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">48+</span><span class="stat-label">Cars Available</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Customer Rating</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Support</span></div>
+      </div>
+    </div>
+    <div class="hero-car-wrap">
+      <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=80" alt="Featured Car" class="hero-car" />
+      <div class="hero-car-glow"></div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-  <section id="home" class="page">
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="section-label">OUR FLEET</div>
+    <div class="photo-strip">
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Sedan" loading="lazy" />
+        <div class="photo-overlay"><span>Sedan</span></div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1503376780353-397c9e3f30d8?auto=format&fit=crop&w=800&q=80" alt="Crossover" loading="lazy" />
+        <div class="photo-overlay"><span>Crossover</span></div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800&q=80" alt="SUV" loading="lazy" />
+        <div class="photo-overlay"><span>SUV</span></div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80" alt="Hatchback" loading="lazy" />
+        <div class="photo-overlay"><span>Hatchback</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET SECTION -->
+  <section id="fleet" class="fleet-section">
     <div class="container">
-      <h1>Welcome to Our Car Rental Portal</h1>
-      <p>
-        Browse a wide range of cars, rent or return vehicles easily, and even
-        add new cars to the fleet. Our portal ensures a seamless car rental
-        experience tailored to your needs.
-      </p>
-      <div class="menu">
-        <button onclick="showCars('all')">All Cars</button>
-        <button onclick="showCars('available')">Available</button>
-        <button onclick="toggleModal('rent')">Rent</button>
-        <button onclick="toggleModal('return')">Return</button>
-        <button onclick="toggleModal('add')">Add Car</button>
+      <div class="section-header">
+        <div class="section-label">AVAILABLE NOW</div>
+        <h2 class="section-title">Choose Your Ride</h2>
       </div>
-      <div id="car-list" class="card-container"></div>
-      <div id="car-info" class="car-info">
-        <p>Select a car to see more information.</p>
+
+      <div class="fleet-controls">
+        <button class="filter-btn active" data-filter="all">All Cars</button>
+        <button class="filter-btn" data-filter="available">Available</button>
+        <button class="filter-btn" data-filter="rented">Rented</button>
+        <div class="fleet-actions">
+          <button class="btn-outline" onclick="openModal('return')">↩ Return Car</button>
+          <button class="btn-primary" onclick="openModal('add')">+ Add Car</button>
+        </div>
+      </div>
+
+      <div id="car-list" class="car-grid"></div>
+
+      <div id="car-detail" class="car-detail hidden">
+        <button class="detail-close" id="detail-close">✕</button>
+        <div id="car-detail-content"></div>
       </div>
     </div>
   </section>
 
-
-  <section class="gallery">
-    <h2>🚘 Featured Cars</h2>
-    <div class="photo-grid">
-      <div class="photo-card">
-        <img src="car1.avif" alt="Car 1" />
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="container about-grid">
+      <div class="about-text">
+        <div class="section-label">WHO WE ARE</div>
+        <h2 class="section-title">Built for the <em>modern driver</em></h2>
+        <p>DriveNow is a premium car rental platform connecting drivers with the right vehicle for every journey — a quick city errand, a weekend escape, or a cross-state drive.</p>
+        <p>Our fleet is maintained to the highest standards, and our booking system is designed to get you on the road in minutes, not hours.</p>
+        <ul class="about-perks">
+          <li><span class="perk-icon">✦</span> Transparent per-day pricing, no hidden fees</li>
+          <li><span class="perk-icon">✦</span> Fully insured fleet with roadside assistance</li>
+          <li><span class="perk-icon">✦</span> Instant digital confirmation on booking</li>
+          <li><span class="perk-icon">✦</span> Easy returns and extensions</li>
+        </ul>
       </div>
-      <div class="photo-card">
-        <img src="car 2.webp" alt="Car 2" />
-      </div>
-      <div class="photo-card">
-        <img src="Car3.avif" alt="Car 3" />
-      </div>
-      <div class="photo-card">
-        <img src="car4.avif" alt="Car 4" />
+      <div class="about-visual">
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80" alt="Our Fleet" />
+          <div class="about-badge">Est. 2020</div>
+        </div>
       </div>
     </div>
   </section>
 
- 
-  <section id="about" class="page">
+  <!-- PAYMENT -->
+  <section id="payment" class="payment-section">
     <div class="container">
-      <h2>About Us</h2>
-      <p>
-        We are a modern car rental service offering a wide range of vehicles
-        to suit your needs. Our goal is to make your journey smooth and
-        enjoyable with reliable and affordable car options. Our easy-to-use
-        portal allows customers to browse available cars, rent them with a
-        few clicks, and manage their rental records effortlessly. We are
-        committed to providing a secure, efficient, and user-friendly
-        platform.
-      </p>
+      <div class="section-label">HASSLE-FREE PAYMENTS</div>
+      <h2 class="section-title">Pay your way</h2>
+      <div class="payment-grid">
+        <div class="payment-card">
+          <div class="payment-icon">📱</div>
+          <h3>UPI</h3>
+          <p>Instant transfers via GPay, PhonePe, Paytm, and all UPI apps.</p>
+        </div>
+        <div class="payment-card">
+          <div class="payment-icon">💳</div>
+          <h3>Cards</h3>
+          <p>Visa, Mastercard, RuPay — debit or credit, all accepted.</p>
+        </div>
+        <div class="payment-card">
+          <div class="payment-icon">🔒</div>
+          <h3>Secure Wallets</h3>
+          <p>256-bit encrypted transactions. Your financial data stays private.</p>
+        </div>
+      </div>
+      <p class="payment-note">All payments are processed securely. No card details are stored on our servers.</p>
     </div>
   </section>
 
-
-  <section id="payment" class="page">
-    <div class="container">
-      <h2>Payment Options</h2>
-      <p>
-        We accept UPI, Debit/Credit cards, and secure online wallet payments.
-        Payment is encrypted for security and your data is protected under
-        our strict privacy policies.
-      </p>
-    </div>
-  </section>
-
-
-  <footer>
-    <div class="footer-content">
-      <img src="https://img.icons8.com/color/48/car.png" alt="CarRental Logo" class="footer-logo" />
-      <p>© 2025 CarRental. All rights reserved.</p>
-      <div class="social-icons">
-        <a href="https://www.instagram.com" target="_blank">
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-icon">◈</span>
+          <span>Drive<strong>Now</strong></span>
+        </a>
+        <p>Premium car rentals for every journey.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Fleet</a>
+        <a href="#about">About</a>
+        <a href="#payment">Payment</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
           <img src="https://img.icons8.com/fluency/32/instagram-new.png" alt="Instagram" />
         </a>
-        <a href="https://www.linkedin.com" target="_blank">
+        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
           <img src="https://img.icons8.com/fluency/32/linkedin.png" alt="LinkedIn" />
         </a>
-        <a href="https://www.facebook.com" target="_blank">
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
           <img src="https://img.icons8.com/fluency/32/facebook-new.png" alt="Facebook" />
         </a>
-        <a href="https://github.com" target="_blank">
+        <a href="https://github.com" target="_blank" aria-label="GitHub">
           <img src="https://img.icons8.com/fluency/32/github.png" alt="GitHub" />
         </a>
       </div>
     </div>
+    <div class="footer-bottom">
+      <p>© 2025 DriveNow. All rights reserved.</p>
+    </div>
   </footer>
+
+  <!-- MODALS -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
